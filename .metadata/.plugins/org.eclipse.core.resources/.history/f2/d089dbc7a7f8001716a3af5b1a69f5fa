@@ -1,0 +1,8 @@
+package main;
+
+public class Pikeman extends Piece
+{
+	
+	
+	public Pikeman()
+}

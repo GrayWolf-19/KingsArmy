@@ -1,0 +1,24 @@
+package main;
+
+public class Board 
+{
+	int size;
+	Space[][] board;
+	
+	public Board(int sizeOfBoard)
+	{
+		size = sizeOfBoard;
+	}
+	
+	public void initialize()
+	{
+		for(int i = 0;i < size;i++)
+			for(int j = 0;j < size;j++)
+				board[i][j] = new Space(new Position(i,j));
+	}
+	
+	public void move()
+	{
+		
+	}
+}

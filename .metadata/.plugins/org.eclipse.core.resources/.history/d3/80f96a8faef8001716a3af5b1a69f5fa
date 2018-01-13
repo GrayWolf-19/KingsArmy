@@ -1,0 +1,10 @@
+package main;
+
+public class King extends Piece
+{
+	public King(boolean play, Position location)
+	{
+		super(play,location);
+		type = 2;
+	}
+}

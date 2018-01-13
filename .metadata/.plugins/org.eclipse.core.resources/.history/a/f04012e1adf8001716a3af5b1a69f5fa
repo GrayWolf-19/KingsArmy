@@ -1,0 +1,10 @@
+package main;
+
+public class Pikeman extends Piece
+{
+	public Pikeman(boolean play, Position location)
+	{
+		super(play,location);
+		type = 0;
+	}
+}

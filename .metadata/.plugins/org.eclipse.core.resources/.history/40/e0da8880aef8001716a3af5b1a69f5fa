@@ -1,0 +1,10 @@
+package main;
+
+public class Knight extends Pikeman
+{
+	public Knight(boolean play, Position location)
+	{
+		super(play,location);
+		type = 1;
+	}
+}

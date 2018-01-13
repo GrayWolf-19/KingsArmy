@@ -1,0 +1,30 @@
+package main;
+
+public class Piece 
+{
+	boolean player; //player 1 == true, player 2 == false
+	Position position;
+	
+	public Piece(boolean play, Position location)
+	{
+		player = play;
+		position = location;
+	}
+	
+	public Position getPosition()
+	{
+		return position;
+	}
+	
+	public boolean getPlayer()
+	{
+		return player;
+	}
+	
+	public Position setPosition(Position newPosition)
+	{
+		Position old = new Position(position.x(),position.y());
+		position = newPosition;
+		return old;
+	}
+}
