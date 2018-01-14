@@ -4,11 +4,13 @@ public class Board
 {
 	private int size;
 	private Space[][] board;
+	private Position kingPlayer1, kingPlayer2;
 	
 	public Board(int sizeOfBoard)
 	{
 		size = sizeOfBoard;
 		initialize();
+		setUpPieces();
 	}
 	
 	public void initialize()
@@ -16,6 +18,15 @@ public class Board
 		for(int i = 0;i < size;i++)
 			for(int j = 0;j < size;j++)
 				board[i][j] = new Space(new Position(i,j));
+	}
+	
+	public void setUpPieces()
+	{
+		//set up player 1
+		board[size/2][0].setPiece(new King(true,new Position(size/2,0)));
+		board[size/2 - 1][0].setPiece(new Knight(true,new Position(size/2 - 1,0)));
+		board[size/2 + 1][0].setPiece(new Knight(true,new Position(size/2 + 1,0)));
+		kingPlayer1 = new Position(size/2,0);
 	}
 	
 	public int getSize()
@@ -30,7 +41,14 @@ public class Board
 		else
 			throw new NullPointerException();
 	}
-	
+	/*
+	public Position[] scrubMoves(Position[] moves, int type)
+	{
+		//cant move off the board
+		//knight cant attack in two if there is nothing in between
+		//king cant attack diagonally
+	}
+	*/
 	public void movePiece(Position from, Position to)
 	{
 		
