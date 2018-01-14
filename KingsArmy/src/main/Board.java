@@ -91,7 +91,7 @@ public class Board
 			for(int i = -1;i <= 1;i++)
 				for(int j = -1;j <= 1;j++)
 					if(!(i == 0 && j == 0) && (piece.getPosition().x() + i >= 0 && piece.getPosition().x() + i < size) && (piece.getPosition().y() + j >= 0 && piece.getPosition().y() + j < size))
-						if(board[piece.getPosition().x() + i][piece.getPosition().y() + j].isEmpty() /*|| board[piece.getPosition().x() + (i * 2)][piece.getPosition().y() + (j * 2)].isEmpty()*/)
+						if(board[piece.getPosition().x() + i][piece.getPosition().y() + j].isEmpty() || ((piece.getPosition().x() + (i * 2) >= 0 && piece.getPosition().x() + (i * 2) < 0) && (piece.getPosition().y() + (j * 2) >= 0 && piece.getPosition().y() + (j * 2) < 0) && board[piece.getPosition().x() + (i * 2)][piece.getPosition().y() + (j * 2)].isEmpty()))
 							remove.add(new Position(piece.getPosition().x() + (i * 2),piece.getPosition().y() + (j * 2)));
 			
 			for(int i = 0;i < moves.size();i++)
