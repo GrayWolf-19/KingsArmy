@@ -22,6 +22,7 @@ import main.Position;
 public class KingsArmy
 {
 	JFrame frame;
+	Click list;
 	JPanel panel;
 	JButton[][] buttons;
 	JButton selected;
@@ -36,6 +37,7 @@ public class KingsArmy
 	}
 	public KingsArmy()
 	{
+		list = new Click();
 		b = new Board(7);
 		buttons = new JButton[7][7];
 		try {
@@ -57,6 +59,7 @@ public class KingsArmy
 				if((i+j)/2.0 == (int) (i+j)/2) buttons[i][j].setBackground(new Color(255, 255, 255));
 				else buttons[i][j].setBackground(new Color(0, 0, 0));
 				panel.add(buttons[i][j]);
+				buttons[i][j].addMouseListener(list);
 				buttons[i][j].setPreferredSize(new Dimension(100, 100));
 			}
 		frame = new JFrame("King's Army");
@@ -146,6 +149,8 @@ public class KingsArmy
 						if(clicked.equals(buttons[i][j]))
 						{
 							ArrayList<Position> p = b.getPiecesMoves(new Position(i,j));
+							options = new ArrayList<JButton>();
+							oColor = new ArrayList<Color>();
 							for(int l = 0; l < p.size(); l++)
 							{
 								options.add(buttons[p.get(l).x()][p.get(l).y()]);
@@ -172,6 +177,13 @@ public class KingsArmy
 							}
 							clicked.setIcon(selected.getIcon());
 							selected.setIcon(null);
+							selected.setBackground(sColor);
+							for(int l = 0; l < options.size(); l++)
+							{
+								options.get(l).setBackground(oColor.get(l));
+							}
+							selected = null;
+							options = null;
 						}
 			}
 						
