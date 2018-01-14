@@ -65,9 +65,9 @@ public class KingsArmy
 					for(int j = 0; j < buttons[i].length; j++)
 						if(clicked.equals(buttons[i][j]))
 						{
-							Position[] p = b.getPiecesMoves(new Position(i,j));
-							for(int l = 0; l < p.length; l++)
-								options.add(buttons[p[l].x()][p[l].y()]);
+							ArrayList<Position> p = b.getPiecesMoves(new Position(i,j));
+							for(int l = 0; l < p.size(); l++)
+								options.add(buttons[p.get(l).x()][p.get(l).y()]);
 							x= i;
 							y=j;
 						}

@@ -33,4 +33,10 @@ public class Space
 		piece = newPiece;
 		return piece.setPosition(position);
 	}
+	public Space deepCopy()
+	{
+		Space s = new Space(position);
+		s.setPiece(piece.deepCopy());
+		return s;
+	}
 }

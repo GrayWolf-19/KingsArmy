@@ -1,5 +1,7 @@
 package main;
 
+import java.util.ArrayList;
+
 public class Knight extends Pikeman
 {
 	public Knight(boolean play, Position location)
@@ -8,24 +10,25 @@ public class Knight extends Pikeman
 		type = 1;
 	}
 	
-	public Position[] getMoves()
+	public ArrayList<Position> getMoves()
 	{
-		Position[] moves = {new Position(position.x() - 1,position.y() - 1),
-							new Position(position.x() - 1,position.y()),
-							new Position(position.x() - 1,position.y() + 1),
-							new Position(position.x(),position.y() - 1),
-							new Position(position.x(),position.y() + 1),
-							new Position(position.x() + 1,position.y() - 1),
-							new Position(position.x() + 1,position.y()),
-							new Position(position.x() + 1,position.y() + 1),
-							new Position(position.x() - 2,position.y() - 2),
-							new Position(position.x() - 2,position.y()),
-							new Position(position.x() - 2,position.y() + 2),
-							new Position(position.x(),position.y() - 2),
-							new Position(position.x(),position.y() + 2),
-							new Position(position.x() + 2,position.y() - 2),
-							new Position(position.x() + 2,position.y()),
-							new Position(position.x() + 2,position.y() + 2)};
+		ArrayList<Position> moves = new ArrayList<Position>();
+		moves.add(new  Position(position.x() - 1,position.y() - 1));
+							moves.add(new  Position(position.x() - 1,position.y()));
+							moves.add(new  Position(position.x() - 1,position.y() + 1));
+							moves.add(new  Position(position.x(), position.y() - 1));
+							moves.add(new  Position(position.x(), position.y() + 1));
+							moves.add(new  Position(position.x() + 1,position.y() - 1));
+							moves.add(new  Position(position.x() + 1,position.y()));
+							moves.add(new  Position(position.x() + 1,position.y() + 1));
+							moves.add(new  Position(position.x() - 2,position.y() - 2));
+							moves.add(new  Position(position.x() - 2,position.y()));
+							moves.add(new  Position(position.x() - 2,position.y() + 2));
+							moves.add(new  Position(position.x(), position.y() - 2));
+							moves.add(new  Position(position.x(), position.y() + 2));
+							moves.add(new  Position(position.x() + 2,position.y() - 2));
+							moves.add(new  Position(position.x() + 2,position.y()));
+							moves.add(new  Position(position.x() + 2,position.y() + 2));
 		return moves;
 	}
 }

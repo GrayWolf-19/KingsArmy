@@ -1,5 +1,7 @@
 package main;
 
+import java.util.ArrayList;
+
 public class King extends Piece
 {
 	public King(boolean play, Position location)
@@ -8,16 +10,17 @@ public class King extends Piece
 		type = 2;
 	}
 	
-	public Position[] getMoves()
+	public ArrayList<Position> getMoves()
 	{
-		Position[] moves = {new Position(position.x() - 1,position.y() - 1),
-							new Position(position.x() - 1,position.y()),
-							new Position(position.x() - 1,position.y() + 1),
-							new Position(position.x(),position.y() - 1),
-							new Position(position.x(),position.y() + 1),
-							new Position(position.x() + 1,position.y() - 1),
-							new Position(position.x() + 1,position.y()),
-							new Position(position.x() + 1,position.y() + 1)};
+		ArrayList<Position> moves = new  ArrayList<Position>();
+		moves.add(new  Position(position.x() - 1,position.y() - 1));
+							moves.add(new  Position(position.x() - 1,position.y()));
+							moves.add(new  Position(position.x() - 1,position.y() + 1));
+							moves.add(new  Position(position.x(), position.y() - 1));
+							moves.add(new  Position(position.x(), position.y() + 1));
+							moves.add(new  Position(position.x() + 1,position.y() - 1));
+							moves.add(new  Position(position.x() + 1,position.y()));
+							moves.add(new  Position(position.x() + 1,position.y() + 1));
 		return moves;
 	}
 }

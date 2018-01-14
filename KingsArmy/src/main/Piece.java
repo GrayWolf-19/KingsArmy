@@ -1,5 +1,7 @@
 package main;
 
+import java.util.ArrayList;
+
 public class Piece 
 {
 	protected boolean player; //player 1 == true, player 2 == false
@@ -35,16 +37,26 @@ public class Piece
 		return old;
 	}
 	
-	public Position[] getMoves()
+	public ArrayList<Position> getMoves()
 	{
-		Position[] moves = {new Position(position.x() - 1,position.y() - 1),
-							new Position(position.x() - 1,position.y()),
-							new Position(position.x() - 1,position.y() + 1),
-							new Position(position.x(),position.y() - 1),
-							new Position(position.x(),position.y() + 1),
-							new Position(position.x() + 1,position.y() - 1),
-							new Position(position.x() + 1,position.y()),
-							new Position(position.x() + 1,position.y() + 1)};
+		ArrayList<Position> moves = new ArrayList<Position>();
+		moves.add(new  Position(position.x() - 1, position.y() - 1));
+							moves.add(new  Position(position.x() - 1, position.y()));
+							moves.add(new  Position(position.x() - 1, position.y() + 1));
+							moves.add(new  Position(position.x(), position.y() - 1));
+							moves.add(new  Position(position.x(), position.y() + 1));
+							moves.add(new  Position(position.x() + 1, position.y() - 1));
+							moves.add(new  Position(position.x() + 1, position.y()));
+							moves.add(new  Position(position.x() + 1, position.y() + 1));
 		return moves;
+	}
+	public Piece deepCopy()
+	{
+		Piece p = null;
+		if(type == -1) p = new Piece(player, position);
+		else if(type == 0)  p = new Pikeman(player, position);
+		else if(type == 1)  p = new Knight(player, position);
+		else if(type == 2)  p = new King(player, position);
+		return p;
 	}
 }

@@ -1,5 +1,7 @@
 package main;
 
+import java.util.ArrayList;
+
 public class Board 
 {
 	private int size;
@@ -58,25 +60,52 @@ public class Board
 		return board[position.x()][position.y()].getPiece();
 	}
 	
-	public Position[] getPiecesMoves(Position position)
+	public ArrayList<Position> getPiecesMoves(Position position)
 	{
 		if(board[position.x()][position.y()].getPiece() != null)
 			return board[position.x()][position.y()].getPiece().getMoves();
 		else
 			throw new NullPointerException();
 	}
-	/*
+	
 	public Position[] scrubMoves(Position[] moves, int type)
 	{
+		Space[][] deep = new Space[size][size];
+		for(int i = 0;i < size;i++)
+			for(int j = 0;j < size;j++)
+				deep[i][j] = board[i][j].deepCopy();
+		
+		for(int i = 0;i < moves.length;i++)
+			if()
+		
 		//cant move off the board
 		//knight cant attack in two if there is nothing in between
 		//king cant attack diagonally
 	}
-	*/
+	
 	public void movePiece(Position from, Position to)
 	{
 		
 	}
 	//in danger boolean for if king is in danger
 	//two position variables that track both kings
+	
+	public boolean isKingInDanger(boolean player)
+	{
+		Position king;
+		if(player)
+			king = kingPlayer1;
+		else
+			king = kingPlayer2;
+		
+		for(int i = king.x() - 2;i <= king.x() + 2;i++)
+			for(int j = king.y() - 2;j <= king.y() + 2;j++)
+				if(i<=6 && j<=6 && i>=0 && j>=0 && board[i][j].getPiece() != null)
+				{
+					ArrayList<Position> p = board[i][j].getPiece().getMoves();
+					for(int k = 0; k < p.size(); k++)
+						if(p.get(k).equals(king)) return true;
+				}
+		return false;
+	}
 }

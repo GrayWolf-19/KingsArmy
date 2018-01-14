@@ -1,5 +1,7 @@
 package main;
 
+import java.util.ArrayList;
+
 public class Pikeman extends Piece
 {
 	public Pikeman(boolean play, Position location)
@@ -8,20 +10,20 @@ public class Pikeman extends Piece
 		type = 0;
 	}
 	
-	public Position[] getMoves()
+	public ArrayList<Position> getMoves()
 	{
-		Position[] moves = new Position[3];
+		ArrayList<Position> moves = new ArrayList<Position>();
 		if(player)
 		{
-			moves[0] = new Position(position.x() - 1,position.y() + 1);
-			moves[1] = new Position(position.x(),position.y() + 1);
-			moves[2] = new Position(position.x() + 1,position.y() + 1);
+			moves.add(new Position(position.x() - 1,position.y() + 1));
+			moves.add(new Position(position.x(),position.y() + 1));
+			moves.add(new Position(position.x() + 1,position.y() + 1));
 		}
 		else
 		{
-			moves[0] = new Position(position.x() - 1,position.y() - 1);
-			moves[1] = new Position(position.x(),position.y() - 1);
-			moves[2] = new Position(position.x() + 1,position.y() - 1);
+			moves.add(new Position(position.x() - 1,position.y() - 1));
+			moves.add(new Position(position.x(),position.y() - 1));
+			moves.add(new Position(position.x() + 1,position.y() - 1));
 		}
 		return moves;
 	}
