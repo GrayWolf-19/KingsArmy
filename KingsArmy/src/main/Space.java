@@ -36,7 +36,10 @@ public class Space
 	public Space deepCopy()
 	{
 		Space s = new Space(position);
-		s.setPiece(piece.deepCopy());
+		if(piece != null)
+			s.setPiece(piece.deepCopy());
+		else
+			s.setPiece(null);
 		return s;
 	}
 }
