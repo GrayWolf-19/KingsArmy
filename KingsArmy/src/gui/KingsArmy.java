@@ -31,12 +31,14 @@ public class KingsArmy
 	ArrayList<Color> oColor;
 	ArrayList<JButton> options;
 	Board b;
+	boolean turn;
 	public static void main(String[] args)
 	{
 		KingsArmy army = new KingsArmy();
 	}
 	public KingsArmy()
 	{
+		turn = true;
 		list = new Click();
 		b = new Board(7);
 		buttons = new JButton[7][7];
@@ -148,6 +150,7 @@ public class KingsArmy
 					for(int j = 0; j < buttons[i].length; j++)
 						if(clicked.equals(buttons[i][j]))
 						{
+							if(b.getPiece(new Position(i,j)) == null || b.getPiece(new Position(i,j)).getPlayer() !=turn) return;
 							ArrayList<Position> p = b.getPiecesMoves(new Position(i,j));
 							options = new ArrayList<JButton>();
 							oColor = new ArrayList<Color>();
@@ -184,6 +187,7 @@ public class KingsArmy
 							}
 							selected = null;
 							options = null;
+							turn = !turn;
 						}
 			}
 						
