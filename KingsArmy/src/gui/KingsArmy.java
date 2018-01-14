@@ -1,12 +1,12 @@
 package gui;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics2D;
 import java.awt.GridLayout;
-import java.awt.Insets;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import main.Board;
@@ -69,10 +68,68 @@ public class KingsArmy
 		ImageIcon image = new ImageIcon(i.getScaledInstance(175, 175, 0));
 		for(int j = 0; j < 7; j++)
 		{
-			
 			buttons[j][1].setIcon(image);
 		}
-			
+		d = buttons[0][0].getSize();
+		i  = Assets.pPikemanAtt[0];
+		image = new ImageIcon(i.getScaledInstance(175, 175, 0));
+		for(int j = 0; j < 7; j++)
+		{
+			buttons[j][5].setIcon(image);
+		}
+		d = buttons[0][0].getSize();
+		i  = Assets.rPikemanAtt[0];
+		image = new ImageIcon(i.getScaledInstance(175, 175, 0));
+		for(int j = 0; j < 2; j++)
+		{
+			buttons[j][0].setIcon(image);
+		}
+		d = buttons[0][0].getSize();
+		i  = Assets.rPikemanAtt[0];
+		image = new ImageIcon(i.getScaledInstance(175, 175, 0));
+		for(int j = 5; j < 7; j++)
+		{
+			buttons[j][0].setIcon(image);
+		}
+		d = buttons[0][0].getSize();
+		i  = Assets.pPikemanAtt[0];
+		image = new ImageIcon(i.getScaledInstance(175, 175, 0));
+		for(int j = 0; j < 2; j++)
+		{
+			buttons[j][6].setIcon(image);
+		}
+		d = buttons[0][0].getSize();
+		i  = Assets.pPikemanAtt[0];
+		image = new ImageIcon(i.getScaledInstance(175, 175, 0));
+		for(int j = 5; j < 7; j++)
+		{
+			buttons[j][6].setIcon(image);
+		}
+		d = buttons[0][0].getSize();
+		i  = Assets.rPikemanAtt[0];
+		image = new ImageIcon(i.getScaledInstance(175, 175, 0));
+		for(int j = 0; j < 2; j++)
+		{
+			buttons[j][0].setIcon(image);
+		}
+		d = buttons[0][0].getSize();
+		i  = Assets.rKnightAtt[0];
+		image = new ImageIcon(i.getScaledInstance(120, 120, 0));
+		buttons[4][0].setIcon(image);
+		buttons[2][0].setIcon(image);
+		d = buttons[0][0].getSize();
+		i  = Assets.pKnightAtt[0];
+		image = new ImageIcon(i.getScaledInstance(120, 120, 0));
+		buttons[4][6].setIcon(image);
+		buttons[2][6].setIcon(image);
+		d = buttons[0][0].getSize();
+		i  = Assets.rKingAtt[0];
+		image = new ImageIcon(i.getScaledInstance(150, 150, 0));
+		buttons[3][0].setIcon(image);
+		d = buttons[0][0].getSize();
+		i  = Assets.pKingAtt[0];
+		image = new ImageIcon(i.getScaledInstance(150, 150, 0));
+		buttons[3][6].setIcon(image);
 	}
 	public class Click implements MouseListener
 	{
