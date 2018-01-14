@@ -1,5 +1,7 @@
 package gui;
 
-public class Assets {
+import java.awt.image.BufferedImage;
 
+public class Assets  {
+	
 }
