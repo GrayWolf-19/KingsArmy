@@ -163,11 +163,17 @@ public class Board
 		{
 			if(board[to.x()][to.y()].getPiece().getPlayer())
 			{
-				
+				if(board[to.x()][to.y()].getPiece().getPosition().y() == 6)
+				{
+					board[to.x()][to.y()].setPiece(new Knight(board[to.x()][to.y()].getPiece().getPlayer(),board[to.x()][to.y()].getPiece().getPosition()));
+				}
 			}
 			else
 			{
-				
+				if(board[to.x()][to.y()].getPiece().getPosition().y() == 0)
+				{
+					board[to.x()][to.y()].setPiece(new Knight(board[to.x()][to.y()].getPiece().getPlayer(),board[to.x()][to.y()].getPiece().getPosition()));
+				}
 			}
 		}
 		
