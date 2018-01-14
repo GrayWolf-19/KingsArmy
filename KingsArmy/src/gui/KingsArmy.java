@@ -25,7 +25,9 @@ public class KingsArmy
 	JPanel panel;
 	JButton[][] buttons;
 	JButton selected;
+	Color sColor;
 	int x, y;
+	ArrayList<Color> oColor;
 	ArrayList<JButton> options;
 	Board b;
 	public static void main(String[] args)
@@ -139,16 +141,23 @@ public class KingsArmy
 			JButton clicked = (JButton)arg0.getSource();
 			if(selected == null)
 			{
-				
 				for(int i = 0; i < buttons.length; i++)
 					for(int j = 0; j < buttons[i].length; j++)
 						if(clicked.equals(buttons[i][j]))
 						{
 							ArrayList<Position> p = b.getPiecesMoves(new Position(i,j));
 							for(int l = 0; l < p.size(); l++)
+							{
 								options.add(buttons[p.get(l).x()][p.get(l).y()]);
+								oColor.add(options.get(l).getBackground());
+								options.get(l).setBackground(Color.GREEN);
+							}
+								
 							x= i;
 							y=j;
+							selected = clicked;
+							sColor = selected.getBackground();
+							selected.setBackground(Color.YELLOW);
 						}
 			}
 			else if(!(options.indexOf(clicked) == -1))
@@ -157,7 +166,12 @@ public class KingsArmy
 					for(int j = 0; j < buttons[i].length; j++)
 						if(clicked.equals(buttons[i][j]))
 						{
-							b.movePiece(new Position(x,y), new Position(i,j));
+							if(b.movePiece(new Position(x,y), new Position(i,j)))
+							{
+								System.out.println(selected.getIcon().toString());
+							}
+							clicked.setIcon(selected.getIcon());
+							selected.setIcon(null);
 						}
 			}
 						
