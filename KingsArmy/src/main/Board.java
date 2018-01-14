@@ -62,10 +62,8 @@ public class Board
 
 	public ArrayList<Position> getPiecesMoves(Position position)
 	{
-		if(board[position.x()][position.y()].getPiece() != null)
+		//if(board[position.x()][position.y()].getPiece() != null)
 			return scrubMoves(board[position.x()][position.y()].getPiece().getMoves(),board[position.x()][position.y()].getPiece());
-		else
-			throw new NullPointerException();
 	}
 
 	public ArrayList<Position> scrubMoves(ArrayList<Position> moves, Piece piece)
