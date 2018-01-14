@@ -56,19 +56,27 @@ public class KingsArmy
 
 		@Override
 		public void mouseClicked(MouseEvent arg0) {
+			JButton clicked = (JButton)arg0.getSource();
 			if(selected == null)
 			{
-				JButton clicked = (JButton)arg0.getSource();
+				
 				for(int i = 0; i < buttons.length; i++)
 					for(int j = 0; j < buttons[i].length; j++)
 						if(clicked.equals(buttons[i][j]))
 						{
-							b.getPiecesMoves(new Position(i,j));
+							Position[] p = b.getPiecesMoves(new Position(i,j));
+							for(int l = 0; l < p.length; l++)
+								options.add(buttons[p[l].x()][p[l].y()]);
 						}
 			}
-			else
+			else if(!(options.indexOf(clicked) == -1))
 			{
-				
+				for(int i = 0; i < buttons.length; i++)
+					for(int j = 0; j < buttons[i].length; j++)
+						if(clicked.equals(buttons[i][j]))
+						{
+							
+						}
 			}
 						
 		}
