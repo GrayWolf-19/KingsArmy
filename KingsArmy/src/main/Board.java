@@ -73,6 +73,10 @@ public class Board
 		for(int i = 0;i < moves.size();i++)
 			if(moves.get(i).x() < 0 || moves.get(i).x() >= size || moves.get(i).y() < 0 || moves.get(i).y() >= size)
 				moves.remove(i);
+		
+		for(int i = 0;i < moves.size();i++)
+			if(board[moves.get(i).x()][moves.get(i).y()].getPiece().getType() == 2 && board[moves.get(i).x()][moves.get(i).y()].getPiece().getPlayer() == piece.getPlayer())
+				moves.remove(i);
 
 		if(piece.type == 2)
 		{
@@ -91,7 +95,7 @@ public class Board
 			for(int i = -1;i <= 1;i++)
 				for(int j = -1;j <= 1;j++)
 					if(!(i == 0 && j == 0) && (piece.getPosition().x() + i >= 0 && piece.getPosition().x() + i < size) && (piece.getPosition().y() + j >= 0 && piece.getPosition().y() + j < size))
-						if(board[piece.getPosition().x() + i][piece.getPosition().y() + j].isEmpty() || board[piece.getPosition().x() + (i * 2)][piece.getPosition().y() + (j * 2)].isEmpty())
+						if(board[piece.getPosition().x() + i][piece.getPosition().y() + j].isEmpty() /*|| board[piece.getPosition().x() + (i * 2)][piece.getPosition().y() + (j * 2)].isEmpty()*/)
 							remove.add(new Position(piece.getPosition().x() + (i * 2),piece.getPosition().y() + (j * 2)));
 			
 			for(int i = 0;i < moves.size();i++)
@@ -174,6 +178,8 @@ public class Board
 				}
 			}
 		}
+		
+		if(board)
 		
 		return attacking;
 	}
