@@ -144,6 +144,14 @@ public class Board
 		board[from.x()][from.y()].setPiece(null);
 		board[to.x()][to.y()].getPiece().setPosition(to);
 		
+		if(board[to.x()][to.y()].getPiece().getType() == 2)
+		{
+			if(board[to.x()][to.y()].getPiece().getPlayer())
+				kingPlayer1 = to;
+			else
+				kingPlayer2 = to;
+		}
+		
 		return attacking;
 	}
 	//in danger boolean for if king is in danger
