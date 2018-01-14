@@ -135,7 +135,16 @@ public class Board
 	public boolean movePiece(Position from, Position to)
 	{
 		boolean attacking;
+		if(board[to.x()][to.y()].isEmpty())
+			attacking = false;
+		else
+			attacking = true;
 		
+		board[to.x()][to.y()].setPiece(board[from.x()][from.y()].getPiece());
+		board[from.x()][from.y()].setPiece(null);
+		board[to.x()][to.y()].getPiece().setPosition(to);
+		
+		return attacking;
 	}
 	//in danger boolean for if king is in danger
 	//two position variables that track both kings
