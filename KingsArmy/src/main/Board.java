@@ -86,6 +86,7 @@ public class Board
 				moves.remove(remove.get(l));
 		}
 
+		
 		if(piece.type == 1)
 		{
 			ArrayList<Position> remove = new ArrayList<Position>();
@@ -95,10 +96,12 @@ public class Board
 						if(board[piece.getPosition().x() + i][piece.getPosition().y() + j].isEmpty() || board[piece.getPosition().x() + (i * 2)][piece.getPosition().y() + (j * 2)].isEmpty())
 							remove.add(new Position(piece.getPosition().x() + (i * 2),piece.getPosition().y() + (j * 2)));
 			
-			for(int l = 0;l < remove.size();l++)
-				moves.remove(remove.get(l));
+			for(int i = 0;i < moves.size();i++)
+				for(int j = 0;j < remove.size();j++)
+					if(moves.get(i).equals(remove.get(j)))
+						moves.remove(i);
 		}
-
+		/*
 		Position king;
 		if(piece.player)
 			king = kingPlayer1;
@@ -128,7 +131,7 @@ public class Board
 			}
 		for(int l = 0;l < remove.size();l++)
 			moves.remove(remove.get(l));
-
+*/
 		return moves;
 
 		//cant move off the board
@@ -154,6 +157,18 @@ public class Board
 				kingPlayer1 = to;
 			else
 				kingPlayer2 = to;
+		}
+		
+		if(board[to.x()][to.y()].getPiece().getType() == 0)
+		{
+			if(board[to.x()][to.y()].getPiece().getPlayer())
+			{
+				
+			}
+			else
+			{
+				
+			}
 		}
 		
 		return attacking;
