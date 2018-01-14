@@ -135,11 +135,8 @@ public class Board
 
 		for(int i = 0;i < moves.size();i++)
 			if(!board[moves.get(i).x()][moves.get(i).y()].isEmpty())
-				if(board[moves.get(i).x()][moves.get(i).y()].getPiece().getPlayer() == piece.getPlayer())
-				{
+				if(board[moves.get(i).x()][moves.get(i).y()].getPiece().getType() == 2 && board[moves.get(i).x()][moves.get(i).y()].getPiece().getPlayer() == piece.getPlayer())
 					moves.remove(i);
-					i--;
-				}
 		
 		return moves;
 	}
