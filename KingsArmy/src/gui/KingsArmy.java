@@ -4,17 +4,23 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import main.Board;
+import main.Position;
 
 public class KingsArmy
 {
 	JFrame frame;
 	JPanel panel;
 	JButton[][] buttons;
-	//Board b;
+	JButton selected;
+	ArrayList<JButton> options;
+	Board b;
 	//Images
 	public static void main(String[] args)
 	{
@@ -22,12 +28,13 @@ public class KingsArmy
 	}
 	public KingsArmy()
 	{
-		//b = new Board();
+		b = new Board(7);
 		buttons = new JButton[7][7];
 		initialize();
 	}
 	public void initialize()
 	{
+		selected = null;
 		panel = new JPanel();
 		panel.setLayout(new GridLayout(7,7));
 		for(int i = 0 ; i < 6; i ++)
@@ -49,8 +56,21 @@ public class KingsArmy
 
 		@Override
 		public void mouseClicked(MouseEvent arg0) {
-			// TODO Auto-generated method stub
-			
+			if(selected == null)
+			{
+				JButton clicked = (JButton)arg0.getSource();
+				for(int i = 0; i < buttons.length; i++)
+					for(int j = 0; j < buttons[i].length; j++)
+						if(clicked.equals(buttons[i][j]))
+						{
+							b.getPiecesMoves(new Position(i,j));
+						}
+			}
+			else
+			{
+				
+			}
+						
 		}
 
 		@Override
