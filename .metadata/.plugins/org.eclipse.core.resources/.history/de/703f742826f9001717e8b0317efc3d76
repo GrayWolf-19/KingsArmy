@@ -22,7 +22,6 @@ import main.Position;
 public class KingsArmy
 {
 	JFrame frame;
-	boolean danger;
 	Click list;
 	JPanel panel;
 	JButton[][] buttons;
@@ -199,7 +198,6 @@ public class KingsArmy
 							selected = null;
 							options = null;
 							turn = !turn;
-							danger = b.isKingInDanger(turn);
 						}
 			}
 						

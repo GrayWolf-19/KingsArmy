@@ -199,7 +199,7 @@ public class KingsArmy
 							selected = null;
 							options = null;
 							turn = !turn;
-							danger = b.isKingInDanger(turn);
+							
 						}
 			}
 						
