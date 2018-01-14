@@ -27,6 +27,24 @@ public class Board
 		board[size/2 - 1][0].setPiece(new Knight(true,new Position(size/2 - 1,0)));
 		board[size/2 + 1][0].setPiece(new Knight(true,new Position(size/2 + 1,0)));
 		kingPlayer1 = new Position(size/2,0);
+		board[0][0].setPiece(new Pikeman(true,new Position(0,0)));
+		board[1][0].setPiece(new Pikeman(true,new Position(1,0)));
+		board[size - 2][0].setPiece(new Pikeman(true,new Position(size - 2,0)));
+		board[size - 1][0].setPiece(new Pikeman(true,new Position(size - 1,0)));
+		for(int i = 0;i < size;i++)
+			board[i][1].setPiece(new Pikeman(true,new Position(i,1)));
+		
+		//set up player 2
+		board[size/2][size - 1].setPiece(new King(true,new Position(size/2,size - 1)));
+		board[size/2 - 1][size - 1].setPiece(new Knight(true,new Position(size/2 - 1,size - 1)));
+		board[size/2 + 1][size - 1].setPiece(new Knight(true,new Position(size/2 + 1,size - 1)));
+		kingPlayer2 = new Position(size/2,size - 1);
+		board[0][size - 1].setPiece(new Pikeman(true,new Position(0,size - 1)));
+		board[1][size - 1].setPiece(new Pikeman(true,new Position(1,size - 1)));
+		board[size - 2][size - 1].setPiece(new Pikeman(true,new Position(size - 2,size - 1)));
+		board[size - 1][size - 1].setPiece(new Pikeman(true,new Position(size - 1,size - 1)));
+		for(int i = 0;i < size;i++)
+			board[i][size - 1].setPiece(new Pikeman(true,new Position(i,size - 1)));
 	}
 	
 	public int getSize()
