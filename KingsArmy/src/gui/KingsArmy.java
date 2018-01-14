@@ -19,6 +19,7 @@ public class KingsArmy
 	JPanel panel;
 	JButton[][] buttons;
 	JButton selected;
+	int x, y;
 	ArrayList<JButton> options;
 	Board b;
 	//Images
@@ -67,6 +68,8 @@ public class KingsArmy
 							Position[] p = b.getPiecesMoves(new Position(i,j));
 							for(int l = 0; l < p.length; l++)
 								options.add(buttons[p[l].x()][p[l].y()]);
+							x= i;
+							y=j;
 						}
 			}
 			else if(!(options.indexOf(clicked) == -1))
@@ -75,7 +78,7 @@ public class KingsArmy
 					for(int j = 0; j < buttons[i].length; j++)
 						if(clicked.equals(buttons[i][j]))
 						{
-							
+							b.movePiece(new Position(x,y), new Position(i,j));
 						}
 			}
 						
