@@ -168,6 +168,16 @@ public class KingsArmy
 							selected.setBackground(Color.YELLOW);
 						}
 			}
+			else if(clicked.equals(selected))
+			{
+				selected.setBackground(sColor);
+				for(int l = 0; l < options.size(); l++)
+				{
+					options.get(l).setBackground(oColor.get(l));
+				}
+				selected = null;
+				options = null;
+			}
 			else if(!(options.indexOf(clicked) == -1))
 			{
 				for(int i = 0; i < buttons.length; i++)
