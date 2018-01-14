@@ -1,13 +1,20 @@
 package gui;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import main.Board;
@@ -22,7 +29,6 @@ public class KingsArmy
 	int x, y;
 	ArrayList<JButton> options;
 	Board b;
-	//Images
 	public static void main(String[] args)
 	{
 		KingsArmy army = new KingsArmy();
@@ -31,6 +37,11 @@ public class KingsArmy
 	{
 		b = new Board(7);
 		buttons = new JButton[7][7];
+		try {
+			Assets.init();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		initialize();
 	}
 	public void initialize()
@@ -38,19 +49,30 @@ public class KingsArmy
 		selected = null;
 		panel = new JPanel();
 		panel.setLayout(new GridLayout(7,7));
-		for(int i = 0 ; i < 6; i ++)
-			for(int j = 0 ; j < 6; j ++)
+		for(int i = 0 ; i <= 6; i ++)
+			for(int j = 0 ; j <= 6; j ++)
 			{
 				buttons[i][j] = new JButton();
 				if((i+j)/2.0 == (int) (i+j)/2) buttons[i][j].setBackground(new Color(255, 255, 255));
 				else buttons[i][j].setBackground(new Color(0, 0, 0));
 				panel.add(buttons[i][j]);
+				buttons[i][j].setPreferredSize(new Dimension(100, 100));
 			}
 		frame = new JFrame("King's Army");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.add(panel);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		frame.pack();
 		frame.setVisible(true);
+		Dimension d = buttons[0][0].getSize();
+		BufferedImage i  = Assets.rPikemanAtt[0];
+		ImageIcon image = new ImageIcon(i.getScaledInstance(175, 175, 0));
+		for(int j = 0; j < 7; j++)
+		{
+			
+			buttons[j][1].setIcon(image);
+		}
+			
 	}
 	public class Click implements MouseListener
 	{
