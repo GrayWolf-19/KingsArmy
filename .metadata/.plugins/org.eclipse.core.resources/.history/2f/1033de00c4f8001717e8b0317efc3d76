@@ -70,7 +70,6 @@ public class KingsArmy
 							}
 						}
 				selected = clicked;
-				selected.setForeground(Color.yellow);
 			}
 			else
 			{

@@ -63,14 +63,8 @@ public class KingsArmy
 					for(int j = 0; j < buttons[i].length; j++)
 						if(clicked.equals(buttons[i][j]))
 						{
-							Position[] a = b.getPiecesMoves(new Position(i,j));
-							for(int l = 0; l< a.length; l++)
-							{
-								options.add(buttons[a[l].x()][a[l].y()]);
-							}
+							b.getPiecesMoves(new Position(i,j));
 						}
-				selected = clicked;
-				selected.setForeground(Color.yellow);
 			}
 			else
 			{

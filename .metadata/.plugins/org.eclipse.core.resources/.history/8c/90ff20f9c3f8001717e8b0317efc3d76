@@ -69,8 +69,6 @@ public class KingsArmy
 								options.add(buttons[a[l].x()][a[l].y()]);
 							}
 						}
-				selected = clicked;
-				selected.setForeground(Color.yellow);
 			}
 			else
 			{
