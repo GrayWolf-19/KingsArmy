@@ -73,10 +73,6 @@ public class Board
 		for(int i = 0;i < moves.size();i++)
 			if(moves.get(i).x() < 0 || moves.get(i).x() >= size || moves.get(i).y() < 0 || moves.get(i).y() >= size)
 				moves.remove(i);
-		
-		for(int i = 0;i < moves.size();i++)
-			if(board[moves.get(i).x()][moves.get(i).y()].getPiece().getType() == 2 && board[moves.get(i).x()][moves.get(i).y()].getPiece().getPlayer() == piece.getPlayer())
-				moves.remove(i);
 
 		if(piece.type == 2)
 		{
@@ -134,6 +130,11 @@ public class Board
 		for(int l = 0;l < remove.size();l++)
 			moves.remove(remove.get(l));
 */
+		for(int i = 0;i < moves.size();i++)
+			if(!board[moves.get(i).x()][moves.get(i).y()].isEmpty())
+				if(board[moves.get(i).x()][moves.get(i).y()].getPiece().getType() == 2 && board[moves.get(i).x()][moves.get(i).y()].getPiece().getPlayer() == piece.getPlayer())
+					moves.remove(i);
+		
 		return moves;
 
 		//cant move off the board
@@ -179,7 +180,10 @@ public class Board
 			}
 		}
 		
-		if(board)
+		if(board[to.x()][to.y()].getPiece().getType() == 1)
+		{
+			
+		}
 		
 		return attacking;
 	}
