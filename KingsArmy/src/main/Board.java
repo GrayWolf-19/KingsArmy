@@ -123,6 +123,7 @@ public class Board
 		for(int p = 0; p<moves.size(); p++)
 		{
 			Board copy = deepCopy();
+			moves = copy.scrubMoves(moves, copy.getPiece(piece.position));
 			copy.movePiece(piece.position, moves.get(p));
 			if(copy.isKingInDanger(piece.player)) remove.add(moves.get(p));
 		}
@@ -141,7 +142,26 @@ public class Board
 			attacking = false;
 		else
 			attacking = true;
-
+		boolean flag = false;
+		for(int i = -1; i < 1 && !flag; i++)
+			for(int j = -1; j < 1; j++)
+				if(from.x()+i == to.x() && from.y()+j == to.y())
+					flag = true;
+		if(!flag)
+		{
+			Position mid = null;
+			if(from.x() == to.x())
+				if(from.y() > to.y())
+					mid = new Position(from.x(), to.y()+1);
+				else
+					mid = new Position(from.x(), from.y()+1);
+			else if(from.y() == to.y())
+				if(from.x() > to.x())
+					mid = new Position(from.y(), to.x()+1);
+				else
+					mid = new Position(from.y(), from.x()+1);
+			board[mid.x()][mid.y()].setPiece(null);
+		}
 		board[to.x()][to.y()].setPiece(board[from.x()][from.y()].getPiece());
 		board[from.x()][from.y()].setPiece(null);
 		board[to.x()][to.y()].getPiece().setPosition(to);
@@ -171,12 +191,6 @@ public class Board
 				}
 			}
 		}
-
-		if(board[to.x()][to.y()].getPiece().getType() == 1)
-		{
-
-		}
-
 		return attacking;
 	}
 

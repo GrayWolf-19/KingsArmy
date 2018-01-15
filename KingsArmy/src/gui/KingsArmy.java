@@ -200,7 +200,27 @@ public class KingsArmy
 						{
 							if(b.movePiece(new Position(x,y), new Position(i,j)))
 							{
-								System.out.println(selected.getIcon().toString());
+								//System.out.ln(selected.getIcon().toString());
+							}
+							boolean flag = false;
+							for(int k = -1; k < 1 && !flag; k++)
+								for(int l = -1; l < 1; l++)
+									if(x+k == i && y+l == j)
+										flag = true;
+							if(!flag)
+							{
+								Position mid = null;
+								if(x == i)
+									if(y > j)
+										mid = new Position(x, j+1);
+									else
+										mid = new Position(x, y+1);
+								else if(y == j)
+									if(x > i)
+										mid = new Position(y, i+1);
+									else
+										mid = new Position(y, x+1);
+								buttons[mid.x()][mid.y()].setIcon(null);
 							}
 							clicked.setIcon(selected.getIcon());
 							selected.setIcon(null);
@@ -213,6 +233,7 @@ public class KingsArmy
 							options = null;
 							turn = !turn;
 							danger = b.isKingInDanger(turn);
+							
 						}
 			}
 						
