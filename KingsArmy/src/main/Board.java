@@ -67,6 +67,7 @@ public class Board
 		return scrubMoves(board[position.x()][position.y()].getPiece().getMoves(),board[position.x()][position.y()].getPiece());
 	}
 
+	
 	public ArrayList<Position> scrubMoves(ArrayList<Position> moves, Piece piece)
 	{
 
@@ -123,7 +124,6 @@ public class Board
 		for(int p = 0; p<moves.size(); p++)
 		{
 			Board copy = deepCopy();
-			moves = copy.scrubMoves(moves, copy.getPiece(piece.position));
 			copy.movePiece(piece.position, moves.get(p));
 			if(copy.isKingInDanger(piece.player)) remove.add(moves.get(p));
 		}
@@ -144,7 +144,7 @@ public class Board
 			attacking = true;
 		boolean flag = false;
 		for(int i = -1; i < 1 && !flag; i++)
-			for(int j = -1; j < 1; j++)
+			for(int j = -1; j < 1 && !flag; j++)
 				if(from.x()+i == to.x() && from.y()+j == to.y())
 					flag = true;
 		if(!flag)
