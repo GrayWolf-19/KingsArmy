@@ -14,9 +14,11 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import main.Board;
+import main.Piece;
 import main.Position;
 
 public class KingsArmy
@@ -46,7 +48,6 @@ public class KingsArmy
 		try {
 			Assets.init();
 		} catch (IOException e) {
-			e.printStackTrace();
 		}
 		initialize();
 	}
@@ -161,12 +162,24 @@ public class KingsArmy
 								oColor.add(options.get(l).getBackground());
 								options.get(l).setBackground(Color.GREEN);
 							}
-								
 							x= i;
 							y=j;
 							selected = clicked;
 							sColor = selected.getBackground();
 							selected.setBackground(Color.YELLOW);
+							ArrayList<Piece> pieces = b.allPieces(turn);
+							boolean exit = false;
+							for(int k = 0; k<pieces.size() && !exit;k++)
+							{
+								ArrayList<Position> moves = b.getPiecesMoves(pieces.get(k).getPosition());
+								if(moves.size()!=0) exit=!exit;
+							}
+							if(exit==false) {
+								frame.setVisible(false);
+								if(turn) JOptionPane.showMessageDialog(null, "Purple Won!", "Game Over", JOptionPane.OK_OPTION);
+								else JOptionPane.showMessageDialog(null, "Red Won!", "Game Over", JOptionPane.OK_OPTION);
+								
+							}
 						}
 			}
 			else if(clicked.equals(selected))

@@ -11,6 +11,7 @@ public class Board
 	public Board(int sizeOfBoard)
 	{
 		size = sizeOfBoard;
+		if(size/2.0 == size/2) size--;
 		board = new Space[size][size];
 		initialize();
 		setUpPieces();
@@ -63,7 +64,7 @@ public class Board
 	public ArrayList<Position> getPiecesMoves(Position position)
 	{
 		//if(board[position.x()][position.y()].getPiece() != null)
-			return scrubMoves(board[position.x()][position.y()].getPiece().getMoves(),board[position.x()][position.y()].getPiece());
+		return scrubMoves(board[position.x()][position.y()].getPiece().getMoves(),board[position.x()][position.y()].getPiece());
 	}
 
 	public ArrayList<Position> scrubMoves(ArrayList<Position> moves, Piece piece)
@@ -72,7 +73,10 @@ public class Board
 
 		for(int i = 0;i < moves.size();i++)
 			if(moves.get(i).x() < 0 || moves.get(i).x() >= size || moves.get(i).y() < 0 || moves.get(i).y() >= size)
+			{
 				moves.remove(i);
+				i--;
+			}
 
 		if(piece.type == 2)
 		{
@@ -84,54 +88,27 @@ public class Board
 				moves.remove(remove.get(l));
 		}
 
-		
+
 		if(piece.type == 1)
 		{
 			ArrayList<Position> remove = new ArrayList<Position>();
 			for(int i = -1;i <= 1;i++)
 				for(int j = -1;j <= 1;j++)
-					if(!(i == 0 && j == 0) && (piece.getPosition().x() + i >= 0 && piece.getPosition().x() + i < size) && (piece.getPosition().y() + j >= 0 && piece.getPosition().y() + j < size))
-						if(board[piece.getPosition().x() + i][piece.getPosition().y() + j].isEmpty() || ((piece.getPosition().x() + (i * 2) >= 0 && piece.getPosition().x() + (i * 2) < 0) && (piece.getPosition().y() + (j * 2) >= 0 && piece.getPosition().y() + (j * 2) < 0) && board[piece.getPosition().x() + (i * 2)][piece.getPosition().y() + (j * 2)].isEmpty()))
+					if(!(i == 0 && j == 0) && (piece.getPosition().x() + i*2 >= 0 && piece.getPosition().x() + i*2 < size) && (piece.getPosition().y() + j*2 >= 0 && piece.getPosition().y() + j*2 < size))
+						if(board[piece.getPosition().x() + i][piece.getPosition().y() + j].isEmpty() || board[piece.getPosition().x() + (i * 2)][piece.getPosition().y() + (j * 2)].isEmpty())
 							remove.add(new Position(piece.getPosition().x() + (i * 2),piece.getPosition().y() + (j * 2)));
-			
-			for(int i = 0;i < moves.size();i++)
-				for(int j = 0;j < remove.size();j++)
+
+			for(int j = 0;j < remove.size();j++)
+			{
+				boolean checked = false;
+				for(int i = 0;i < moves.size() && !checked;i++)
 					if(moves.get(i).equals(remove.get(j)))
 					{
 						moves.remove(i);
-						i--;
-					}
-		}
-		
-		Position king;
-		if(piece.player)
-			king = kingPlayer1;
-		else
-			king = kingPlayer2;
-
-		ArrayList<Position> remove = new ArrayList<Position>();
-		for(int i = 0;i < 7;i++)
-			for(int j = 0;j < 7;j++)
-			{
-				if(piece.position.equals(new Position(i,j)))
-				{
-					for(int p = 0; p<moves.size(); p++)
-					{
-						Board copy = deepCopy();
-						copy.movePiece(piece.position, moves.get(p));
-						if(copy.isKingInDanger(piece.player)) remove.add(moves.get(p));
-					}
-				}
-				for(int p = 0; p<moves.size(); p++)
-					if(moves.get(p).equals(new Position(i,j)))
-					{
-						Board copy = deepCopy();
-						copy.movePiece(piece.position, moves.get(p));
-						if(copy.isKingInDanger(piece.player)) remove.add(moves.get(p));
+						checked = true;
 					}
 			}
-		for(int l = 0;l < remove.size();l++)
-			moves.remove(remove.get(l));
+		}
 
 		for(int i = 0;i < moves.size();i++)
 			if(!board[moves.get(i).x()][moves.get(i).y()].isEmpty())
@@ -140,7 +117,20 @@ public class Board
 					moves.remove(i);
 					i--;
 				}
-		
+
+
+		ArrayList<Position> remove = new ArrayList<Position>();
+		for(int p = 0; p<moves.size(); p++)
+		{
+			Board copy = deepCopy();
+			copy.movePiece(piece.position, moves.get(p));
+			if(copy.isKingInDanger(piece.player)) remove.add(moves.get(p));
+		}
+		for(int l = 0;l < remove.size();l++)
+			moves.remove(remove.get(l));
+
+
+
 		return moves;
 	}
 
@@ -151,11 +141,11 @@ public class Board
 			attacking = false;
 		else
 			attacking = true;
-		
+
 		board[to.x()][to.y()].setPiece(board[from.x()][from.y()].getPiece());
 		board[from.x()][from.y()].setPiece(null);
 		board[to.x()][to.y()].getPiece().setPosition(to);
-		
+
 		if(board[to.x()][to.y()].getPiece().getType() == 2)
 		{
 			if(board[to.x()][to.y()].getPiece().getPlayer())
@@ -163,7 +153,7 @@ public class Board
 			else
 				kingPlayer2 = to;
 		}
-		
+
 		if(board[to.x()][to.y()].getPiece().getType() == 0)
 		{
 			if(board[to.x()][to.y()].getPiece().getPlayer())
@@ -181,15 +171,27 @@ public class Board
 				}
 			}
 		}
-		
+
 		if(board[to.x()][to.y()].getPiece().getType() == 1)
 		{
-			
+
 		}
-		
+
 		return attacking;
 	}
-	
+
+	public ArrayList<Piece> allPieces(boolean player)
+	{
+		ArrayList<Piece> p = new ArrayList<Piece>();
+		for(int i = 0; i<7;i++)
+			for(int j = 0; j<7;j++)
+				if(getPiece(new Position(i,j))!= null && getPiece(new Position(i,j)).player == player)
+				{
+					p.add(getPiece(new Position(i,j)));
+				}
+		return p;
+	}
+
 	public boolean isKingInDanger(boolean player)
 	{
 		Position king;
