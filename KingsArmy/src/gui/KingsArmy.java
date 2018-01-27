@@ -203,8 +203,8 @@ public class KingsArmy
 								//System.out.ln(selected.getIcon().toString());
 							}
 							boolean flag = false;
-							for(int k = -1; k < 1 && !flag; k++)
-								for(int l = -1; l < 1; l++)
+							for(int k = -1; k <= 1 && !flag; k++)
+								for(int l = -1; l <= 1; l++)
 									if(x+k == i && y+l == j)
 										flag = true;
 							if(!flag)

@@ -143,8 +143,8 @@ public class Board
 		else
 			attacking = true;
 		boolean flag = false;
-		for(int i = -1; i < 1 && !flag; i++)
-			for(int j = -1; j < 1 && !flag; j++)
+		for(int i = -1; i <= 1 && !flag; i++)
+			for(int j = -1; j <= 1 && !flag; j++)
 				if(from.x()+i == to.x() && from.y()+j == to.y())
 					flag = true;
 		if(!flag)
