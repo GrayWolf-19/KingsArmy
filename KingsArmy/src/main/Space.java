@@ -45,4 +45,8 @@ public class Space
 			s.setPiece(null);
 		return s;
 	}
+	public String toString()
+	{
+		return "Space at: "+ position.toString();
+	}
 }

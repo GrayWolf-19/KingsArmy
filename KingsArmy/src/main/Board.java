@@ -157,9 +157,19 @@ public class Board
 					mid = new Position(from.x(), from.y()+1);
 			else if(from.y() == to.y())
 				if(from.x() > to.x())
-					mid = new Position(from.y(), to.x()+1);
+					mid = new Position(to.x()+1, from.y());
 				else
-					mid = new Position(from.y(), from.x()+1);
+					mid = new Position(from.x()+1, from.y());
+			else if(from.x() > to.x())
+				if(from.y() > to.y())
+					mid = new Position(to.x() + 1, to.y()+1);
+				else
+					mid = new Position(to.x() + 1, from.y()+1);
+			else if(from.y() > to.y())
+				mid = new Position(from.x() + 1, to.y()+1);
+			else
+				mid = new Position(from.x() + 1, from.y()+1);
+				
 			board[mid.x()][mid.y()].setPiece(null);
 		}
 		board[to.x()][to.y()].setPiece(board[from.x()][from.y()].getPiece());

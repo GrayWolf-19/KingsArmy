@@ -13,6 +13,8 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -72,7 +74,7 @@ public class KingsArmy
 		frame = new JFrame("King's Army");
 		frame.add(panel);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+
 		frame.pack();
 		frame.setVisible(true);
 		Dimension d = buttons[0][0].getSize();
@@ -192,7 +194,7 @@ public class KingsArmy
 								frame.setVisible(false);
 								if(turn) JOptionPane.showMessageDialog(null, "Purple Won!", "Game Over", JOptionPane.OK_OPTION);
 								else JOptionPane.showMessageDialog(null, "Red Won!", "Game Over", JOptionPane.OK_OPTION);
-								
+
 							}
 						}
 			}
@@ -212,89 +214,151 @@ public class KingsArmy
 					for(int j = 0; j < buttons[i].length; j++)
 						if(clicked.equals(buttons[i][j]))
 						{
-							if(b.movePiece(new Position(x,y), new Position(i,j)))
-							{
-								//System.out.ln(selected.getIcon().toString());
-							}
+							double rotation;
 							boolean flag = false;
 							for(int k = -1; k <= 1 && !flag; k++)
 								for(int l = -1; l <= 1; l++)
 									if(x+k == i && y+l == j)
+									{
 										flag = true;
-							if(!flag)
+										if(k== 0)
+											if(l == -1)
+												rotation = 3*Math.PI/2;
+											else
+												rotation = Math.PI/2;
+										else
+											rotation = Math.atan2(l, -k);
+										switch(b.getPiece(new Position(x, y)).getType())
+										{
+										case 0:
+										{
+											BufferedImage bi;
+											if(!turn) {bi  = Assets.pPikemanAtt[0];
+											bi= rotate(bi, rotation);
+											}
+											else {  bi  = Assets.rPikemanAtt[0];
+											bi= rotate(bi, rotation);
+											}
+											selected.setIcon(new ImageIcon(bi.getScaledInstance(120, 120, 0)));
+											break;
+										}
+										case 1:
+										{
+											BufferedImage bi;
+											if(!turn) {
+												bi  = Assets.pKnightAtt[0];
+												bi= rotate(bi, rotation);
+											}
+											else
+											{bi  = Assets.rKnightAtt[0];
+											bi= rotate(bi, rotation);
+											}
+											selected.setIcon(new ImageIcon(bi.getScaledInstance(120, 120, 0)));
+											break;
+										}
+										case 2:
+										{
+											BufferedImage bi;
+											if(!turn) { bi  = Assets.pKingAtt[0];
+											bi= rotate(bi, rotation);
+											}
+											else {  bi  = Assets.rKingAtt[0];
+											bi= rotate(bi, rotation);
+											}
+											selected.setIcon(new ImageIcon(bi.getScaledInstance(120, 120, 0)));
+											break;
+										}
+										}
+									}
+							Timer timer = new Timer();
+							final int iSave = i, jSave= j;
+							final boolean fSave = flag;
+							timer.schedule(new TimerTask() 
 							{
-								Position mid = null;
-								if(x == i)
-									if(y > j)
-										mid = new Position(x, j+1);
-									else
-										mid = new Position(x, y+1);
-								else if(y == j)
-									if(x > i)
-										mid = new Position(y, i+1);
-									else
-										mid = new Position(y, x+1);
-								buttons[mid.x()][mid.y()].setIcon(null);
-							}
-							clicked.setIcon(selected.getIcon());
-							selected.setIcon(null);
-							selected.setBackground(sColor);
-							for(int l = 0; l < options.size(); l++)
-							{
-								options.get(l).setBackground(oColor.get(l));
-							}
-							selected = null;
-							options = null;
-							turn = !turn;
-							danger = b.isKingInDanger(turn);
+								public void run()
+								{
+									if(b.movePiece(new Position(x,y), new Position(iSave,jSave)))
+									{
+										//System.out.ln(selected.getIcon().toString());
+									}
+
+									if(!fSave)
+									{
+										Position mid = null;
+										if(x == iSave)
+											if(y > jSave)
+												mid = new Position(x, jSave+1);
+											else
+												mid = new Position(x, y+1);
+										else if(y == jSave)
+											if(x > iSave)
+												mid = new Position(y, iSave+1);
+											else
+												mid = new Position(y, x+1);
+										buttons[mid.x()][mid.y()].setIcon(null);
+									}
+									clicked.setIcon(selected.getIcon());
+									selected.setIcon(null);
+									selected.setBackground(sColor);
+									for(int l = 0; l < options.size(); l++)
+									{
+										options.get(l).setBackground(oColor.get(l));
+									}
+									selected = null;
+									options = null;
+									turn = !turn;
+									danger = b.isKingInDanger(turn);
+								}
+							}, 200);
 							
+
 						}
 			}
-						
+
 		}
 
 		@Override
 		public void mouseEntered(MouseEvent arg0) {
 			// TODO Auto-generated method stub
-			
+
 		}
 
 		@Override
 		public void mouseExited(MouseEvent arg0) {
 			// TODO Auto-generated method stub
-			
+
 		}
 
 		@Override
 		public void mousePressed(MouseEvent arg0) {
 			// TODO Auto-generated method stub
-			
+
 		}
 
 		@Override
 		public void mouseReleased(MouseEvent arg0) {
 			// TODO Auto-generated method stub
-			
+
 		}
-		
+
 	}
 	public static BufferedImage rotate(BufferedImage image, double angle) {
-	    double sin = Math.abs(Math.sin(angle)), cos = Math.abs(Math.cos(angle));
-	    int w = image.getWidth(), h = image.getHeight();
-	    int neww = (int)Math.floor(w*cos+h*sin), newh = (int) Math.floor(h * cos + w * sin);
-	    GraphicsConfiguration gc = getDefaultConfiguration();
-	    BufferedImage result = gc.createCompatibleImage(neww, newh, Transparency.TRANSLUCENT);
-	    Graphics2D g = result.createGraphics();
-	    g.translate((neww - w) / 2, (newh - h) / 2);
-	    g.rotate(angle, w / 2, h / 2);
-	    g.drawRenderedImage(image, null);
-	    g.dispose();
-	    return result;
+		double sin = Math.abs(Math.sin(angle)), cos = Math.abs(Math.cos(angle));
+		int w = image.getWidth(), h = image.getHeight();
+		int neww = (int)Math.floor(w*cos+h*sin), newh = (int) Math.floor(h * cos + w * sin);
+		GraphicsConfiguration gc = getDefaultConfiguration();
+		BufferedImage result = gc.createCompatibleImage(neww, newh, Transparency.TRANSLUCENT);
+		Graphics2D g = result.createGraphics();
+		g.translate((neww - w) / 2, (newh - h) / 2);
+		g.rotate(angle, w/2, h/2);
+		g.drawRenderedImage(image, null);
+		g.dispose();
+		return result;
 	}
 
 	private static GraphicsConfiguration getDefaultConfiguration() {
-	    GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-	    GraphicsDevice gd = ge.getDefaultScreenDevice();
-	    return gd.getDefaultConfiguration();
+		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		GraphicsDevice gd = ge.getDefaultScreenDevice();
+		return gd.getDefaultConfiguration();
 	}
 }

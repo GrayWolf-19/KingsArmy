@@ -24,4 +24,9 @@ public class Position
 	{
 		return this.x() == newPos.x() && this.y() == newPos.y();
 	}
+
+	public String toString()
+	{
+		return "("+x() + ", " + y() + ")";
+	}
 }

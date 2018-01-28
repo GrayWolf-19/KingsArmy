@@ -59,4 +59,8 @@ public class Piece
 		else if(type == 2)  p = new King(player, position);
 		return p;
 	}
+	public String toString()
+	{
+		return "Piece at: "+ position.toString();
+	}
 }

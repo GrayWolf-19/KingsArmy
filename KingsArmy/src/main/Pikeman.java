@@ -27,4 +27,9 @@ public class Pikeman extends Piece
 		}
 		return moves;
 	}
+
+	public String toString()
+	{
+		return "Pikeman at: "+ position.toString();
+	}
 }

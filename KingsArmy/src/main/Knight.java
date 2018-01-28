@@ -31,4 +31,9 @@ public class Knight extends Pikeman
 		moves.add(new  Position(position.x() + 2,position.y() + 2));
 		return moves;
 	}
+
+	public String toString()
+	{
+		return "Knight at: "+ position.toString();
+	}
 }

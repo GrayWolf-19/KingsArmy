@@ -23,4 +23,9 @@ public class King extends Piece
 							moves.add(new  Position(position.x() + 1,position.y() + 1));
 		return moves;
 	}
+
+	public String toString()
+	{
+		return "King at: "+ position.toString();
+	}
 }
