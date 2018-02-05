@@ -239,7 +239,7 @@ public class KingsArmy
 											else {  bi  = Assets.rPikemanAtt[0];
 											bi= rotate(bi, rotation);
 											}
-											selected.setIcon(new ImageIcon(bi.getScaledInstance(120, 120, 0)));
+											selected.setIcon(new ImageIcon(bi.getScaledInstance(175, 175, 0)));
 											break;
 										}
 										case 1:
@@ -253,7 +253,7 @@ public class KingsArmy
 											{bi  = Assets.rKnightAtt[0];
 											bi= rotate(bi, rotation);
 											}
-											selected.setIcon(new ImageIcon(bi.getScaledInstance(120, 120, 0)));
+											selected.setIcon(new ImageIcon(bi.getScaledInstance(175, 175, 0)));
 											break;
 										}
 										case 2:
@@ -265,7 +265,7 @@ public class KingsArmy
 											else {  bi  = Assets.rKingAtt[0];
 											bi= rotate(bi, rotation);
 											}
-											selected.setIcon(new ImageIcon(bi.getScaledInstance(120, 120, 0)));
+											selected.setIcon(new ImageIcon(bi.getScaledInstance(175, 175, 0)));
 											break;
 										}
 										}
