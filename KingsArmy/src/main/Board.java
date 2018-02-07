@@ -204,6 +204,12 @@ public class Board
 		return attacking;
 	}
 
+	public Position getKing(boolean turn)
+	{
+		if(turn) return kingPlayer1;
+		else return kingPlayer2;
+	}
+	
 	public ArrayList<Piece> allPieces(boolean player)
 	{
 		ArrayList<Piece> p = new ArrayList<Piece>();
